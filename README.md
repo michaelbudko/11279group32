@@ -1,2 +1,3 @@
-# cen3031
-Github repository for CEN3031 project
+# 11279group32
+
+Member 1: Mikhail Budko
