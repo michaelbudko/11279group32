@@ -5,7 +5,7 @@ function App()
     return(
         <div className="App">
             <form className="search-form">
-                <input className="search-bar" type="text"/>
+                <input className="search-bar" type="text" placeholder="Search address/ZIP"/>
                 <button className="search-button" type="submit">Search</button>
             </form>
         </div>
