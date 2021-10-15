@@ -4,10 +4,10 @@ function Form({setInputText,inputText,setQuery}) {
     const inputTextHandler=(e)=>{
         console.log(e.target.value);
         setInputText(e.target.value);
-        setQuery(e.target.value);
     };
     const submitHandler = (e) =>{
         e.preventDefault();
+        setQuery(inputText);
         setInputText("");
     };
     return (
