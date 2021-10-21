@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'; 
 import Form from "./Components/Form";
+import Info from "./Components/Info";
 
 const App=() =>
 {
@@ -8,10 +9,12 @@ const App=() =>
     return(
         <div className="App">
             <header> 
-                <h1> EnergIO {query} </h1>
+                <h1> EnergIO  </h1>
             </header>
             <Form setInputText={setInputText} inputText={inputText} setQuery={setQuery} />
-        </div>
+			<h2> {query} </h2>
+			<Info key = {query} address={query} /> 
+        </div> 
     );
 }
 
