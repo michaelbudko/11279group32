@@ -12,8 +12,8 @@ const App=() =>
                 <h1> EnergIO  </h1>
             </header>
             <Form setInputText={setInputText} inputText={inputText} setQuery={setQuery} />
-			<h2> {query} </h2>
-			<Info key = {query} address={query} /> 
+	    <h2> {query} </h2>
+	    <Info key = {query} address={query} /> 
         </div> 
     );
 }
