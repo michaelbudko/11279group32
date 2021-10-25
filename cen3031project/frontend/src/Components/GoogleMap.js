@@ -15,6 +15,7 @@ export class MapContainer extends React.Component {
                     lng: this.props.address.longitude
                 }} zoom={7}>
                 <Marker onClick={this.onMarkerClick}
+                    position={{ lat: this.props.address.latitude, lng: this.props.address.longitude }}
                     name={'Current location'} />
 
             </Map>
