@@ -13,13 +13,20 @@ const App = () => {
     return (
         <div className="App">
             <header>
-                <h1> EnergIO  </h1>
+                <h1> EnergIO </h1>
+				
+				<img src="logo192.png" alt="App Logo"/> 
             </header>
+			<p> 
+				Enter an address/ZIP code below to get<br/>
+				solar information and cost savings at the address below!
+			</p>
             <Form setInputText={setInputText} inputText={inputText} setQuery={setQuery} setAddress={setAddress} />
             <h2> {query} </h2>
-            <Info key={query} address={query} />
+            <Info key={query} address={query} id="Info"/>
             <GoogleMap
-                address={address} />
+                address={address} 
+				id="Map"/>
         </div>
     );
 }

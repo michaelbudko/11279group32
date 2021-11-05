@@ -5,20 +5,22 @@ export class MapContainer extends React.Component {
     render() {
         console.log(this.props.address)
         return (
-            <Map google={this.props.google}
-                initialCenter={{
-                    lat: this.props.address.latitude,
-                    lng: this.props.address.longitude
-                }}
-                center={{
-                    lat: this.props.address.latitude,
-                    lng: this.props.address.longitude
-                }} zoom={7}>
-                <Marker onClick={this.onMarkerClick}
-                    position={{ lat: this.props.address.latitude, lng: this.props.address.longitude }}
-                    name={'Current location'} />
-
-            </Map>
+			<div id = "Map">
+				<Map google={this.props.google}
+					style={{
+						width: '94%',
+						height: '60%',
+					}}
+					initialCenter={{
+						lat: this.props.address.latitude,
+						lng: this.props.address.longitude
+					}} zoom={14}>
+					<Marker onClick={this.onMarkerClick}
+						position={{ lat: this.props.address.latitude, lng: this.props.address.longitude }}
+						name={'Current location'} />
+					
+				</Map>
+			</div>
         );
     }
 }
