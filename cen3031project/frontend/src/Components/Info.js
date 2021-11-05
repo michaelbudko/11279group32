@@ -26,14 +26,14 @@ export default class Info extends React.Component {
 	
 	getApiInfo(address) {
 		//Stops function when nothing is inputted
-		if(address ==""){
+		if(address === ""){
 			return;
 		}
 		
 		//API URLs
 		const api_key = 'api_key=hbWbn4H2aZ8jE99uBd5khfbHxqbF09JKwcXA7ayH&';
 		const solarRad_url = 'https://developer.nrel.gov/api/solar/solar_resource/v1.json?' + api_key + "&address=" + address;
-		const solarSat_url = 'https://developer.nrel.gov/api/solar/solar_resource/v1.json?'+ api_key + "&address=" + address;
+		//const solarSat_url = 'https://developer.nrel.gov/api/solar/solar_resource/v1.json?'+ api_key + "&address=" + address;
 		const util_url = 'https://developer.nrel.gov/api/utility_rates/v3.json?' + api_key + "address=" + address;
 		const pvwatts_url = 'https://developer.nrel.gov/api/pvwatts/v6.json?' + api_key + "address=" + address + "&system_capacity=4&azimuth=180&tilt=40&array_type=1&module_type=1&losses=10";
 		
@@ -88,28 +88,28 @@ export default class Info extends React.Component {
 	render() {
 		//Display message at start before query
 		if(!this.state.isLoaded){
-			return <div> Input Address Above!</div>;
+			return <div> Input Address Above!<br/><br/></div>;
 		}
 		else{
 			return (
 				//Display info from APIs
-				<div key={this.props.address}>
+				<div key={this.props.address} >
 				
-				<b>Solar Radiation Stats</b><br/>
-				Average Daily Direct Normal Irradiance: {this.state.dni} <br/>
-				Average Daily Global Horizontal Irradiance: {this.state.ghi}<br/><br/>
+				<h3>Solar Radiation Stats</h3>
+				Average Daily Direct Normal Irradiance: {this.state.dni} kWh/m<sup>2</sup>/day <br/>
+				Average Daily Global Horizontal Irradiance: {this.state.ghi} kWh/m<sup>2</sup>/day<br/><br/>
 				
-				<b>Solar Power Output</b><br/>
-				Average Output for 4 kW Capacity System in kWh<br/>
-				AC Monthly Output: {this.state.ac_monthly}<br/>
-				AC Annual Output: {this.state.ac_annual}<br/><br/>
+				<h3>Solar Power Output</h3>
+				Average Output for 4 kW Capacity System<br/>
+				AC Monthly Output: {this.state.ac_monthly} kWh<br/>
+				AC Annual Output: {this.state.ac_annual} kWh<br/><br/>
 				
-				<b>Utility Info</b><br/>
-				Utility Companies: {this.state.util_comp} <br/>
-				Utility Rates ($/kWh) <br/>
-				Commerical: {this.state.util_rate_com}<br/>
-				Industrial: {this.state.util_rate_ind}<br/>
-				Residential: {this.state.util_rate_res}<br/>
+				<h3>Utility Info</h3>
+				Utility Company: {this.state.util_comp} <br/>
+				Utility Rates <br/>
+				Commerical: {this.state.util_rate_com} $/kWh<br/>
+				Industrial: {this.state.util_rate_ind} $/kWh<br/>
+				Residential: {this.state.util_rate_res} $/kWh<br/><br/>
 				</div>
 			);
 		}
