@@ -27,7 +27,9 @@ const App = () => {
             <GoogleMap
                 address={address} 
 				id="Map"/>
+                
         </div>
+        
     );
 }
 
