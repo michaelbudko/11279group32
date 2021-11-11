@@ -17,6 +17,7 @@ function Form({ setInputText, inputText, setQuery, setAddress }) {
         var latitude = 5;
         const link = "https://maps.googleapis.com/maps/api/geocode/json?address=" + inputText +
             "&key=AIzaSyDtaCy-P7DUboSkVmNBlolqOyQEmJ7QE_s";
+        try {
         await axios.get(link).then(res => {
             console.log(res.data.results[0].geometry)
             if (res.data.status === "OK") {
@@ -27,7 +28,13 @@ function Form({ setInputText, inputText, setQuery, setAddress }) {
         setAddress({
             latitude,
             longitude
-        })
+        }) }
+        catch (e) {
+            latitude = NaN;
+            longitude = NaN;
+            setQuery("");
+            setAddress("")
+        }
     }
 
 

@@ -42,11 +42,13 @@ export default class Info extends React.Component {
 			.then((response) => response.json())
 			.then((data) => {
 				const output = data.outputs;
-				this.setState({
-					dni: output.avg_dni.annual,
-					ghi: output.avg_ghi.annual,
-					isLoaded: true,
-				});
+				try {
+					this.setState({
+						dni: output.avg_dni.annual,
+						ghi: output.avg_ghi.annual,
+						isLoaded: true,
+					});
+				} catch (e) {}
 			});
 			
 		//Solar Panel
@@ -118,6 +120,11 @@ export default class Info extends React.Component {
 				Commerical: {this.state.util_rate_com} $/kWh<br/>
 				Industrial: {this.state.util_rate_ind} $/kWh<br/>
 				Residential: {this.state.util_rate_res} $/kWh<br/><br/>
+
+				<h3>Average Utility Costs</h3>
+				Residential figures based on 893 kWh/month average<br/><br/>
+				Average Monthly Cost (Residential): ${parseFloat((this.state.util_rate_res)*893).toFixed(2)} <br/>
+				Average Annual Cost (Residential): ${parseFloat((this.state.util_rate_res)*10715).toFixed(2)} <br/><br/>
 				<Line data={dataChart}></Line>
 				</div>
 				
