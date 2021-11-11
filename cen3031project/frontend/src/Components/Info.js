@@ -1,6 +1,5 @@
 import React from 'react'
-
-
+import {Line} from 'react-chartjs-2'
 export default class Info extends React.Component {
 	constructor(props){
 		super(props);
@@ -43,15 +42,11 @@ export default class Info extends React.Component {
 			.then((response) => response.json())
 			.then((data) => {
 				const output = data.outputs;
-				try {
-					this.setState({
-						dni: output.avg_dni.annual,
-						ghi: output.avg_ghi.annual,
-						isLoaded: true,
-					});
-				} catch (e) {
-
-				}
+				this.setState({
+					dni: output.avg_dni.annual,
+					ghi: output.avg_ghi.annual,
+					isLoaded: true,
+				});
 			});
 			
 		//Solar Panel
@@ -95,6 +90,15 @@ export default class Info extends React.Component {
 			return <div> Input Address Above!<br/><br/></div>;
 		}
 		else{
+			const dataChart = {
+				labels: ['2021','2022','2023','2024','2025'],
+				datasets: [
+					{label: 'Cost',
+					borderColor: 'rgb(255, 255, 255)',
+					pointBackgroundColor: 'rgb(255, 0, 0)',
+					data: [this.state.util_rate_res*10909,this.state.util_rate_res*10909*2,this.state.util_rate_res*10909*3] }
+				]
+			}
 			return (
 				//Display info from APIs
 				<div key={this.props.address} >
@@ -114,12 +118,9 @@ export default class Info extends React.Component {
 				Commerical: {this.state.util_rate_com} $/kWh<br/>
 				Industrial: {this.state.util_rate_ind} $/kWh<br/>
 				Residential: {this.state.util_rate_res} $/kWh<br/><br/>
-
-				<h3>Average Utility Costs</h3>
-				Residential figures based on 893 kWh/month average<br/><br/>
-				Average Monthly Cost (Residential): ${parseFloat((this.state.util_rate_res)*893).toFixed(2)} <br/>
-				Average Annual Cost (Residential): ${parseFloat((this.state.util_rate_res)*10715).toFixed(2)} <br/><br/>
+				<Line data={dataChart}></Line>
 				</div>
+				
 			);
 		}
 	}
