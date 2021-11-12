@@ -46,21 +46,27 @@ export default class Info extends React.Component {
 					this.setState({
 						dni: output.avg_dni.annual,
 						ghi: output.avg_ghi.annual,
-						isLoaded: true,
+						
+						isLoaded:true,
 					});
-				} catch (e) {}
+				} catch (e) {
+					this.setState({isLoaded: false,isError:true,});
+				}
 			});
 			
 		//Solar Panel
 		fetch(pvwatts_url)
 			.then((response) => response.json())
 			.then((data) => {
-				
-				const output = data.outputs;
-				this.setState({
-					ac_annual: output.ac_annual.toFixed(2),
-					ac_monthly: ((output.ac_annual)/12).toFixed(2),
-				});
+				try{
+					const output = data.outputs;
+					this.setState({
+						ac_annual: output.ac_annual.toFixed(2),
+						ac_monthly: ((output.ac_annual)/12).toFixed(2),
+					});
+				}catch (e) {
+					this.setState({isLoaded: false, isError:true,});
+				}
 			});
 		
 		//Utility Rates
@@ -75,6 +81,7 @@ export default class Info extends React.Component {
 					util_rate_com: output.commercial,
 					util_rate_ind: output.industrial,
 					util_rate_res: output.residential,
+					
 			});
 		});
 		
@@ -90,6 +97,8 @@ export default class Info extends React.Component {
 		//Display message at start before query
 		if(!this.state.isLoaded){
 			return <div> Input Address Above!<br/><br/></div>;
+		}else if(this.state.isError){
+			return <div> Error: Address not found.<br/><br/></div>
 		}
 		else{
 			const dataChart = {
@@ -121,7 +130,7 @@ export default class Info extends React.Component {
 				Industrial: {this.state.util_rate_ind} $/kWh<br/>
 				Residential: {this.state.util_rate_res} $/kWh<br/><br/>
 
-				<h3>Average Utility Costs</h3>
+				<h3>Average Utility Costs</h3><br/>
 				Residential figures based on 893 kWh/month average<br/><br/>
 				Average Monthly Cost (Residential): ${parseFloat((this.state.util_rate_res)*893).toFixed(2)} <br/>
 				Average Annual Cost (Residential): ${parseFloat((this.state.util_rate_res)*10715).toFixed(2)} <br/><br/>
