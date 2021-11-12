@@ -15,14 +15,13 @@ const App = () => {
             <header>
                 <h1> EnergIO </h1>
 				
-				<img src="logo192.png" alt="App Logo"/> 
+				<img src="logo.png" alt="App Logo"/> 
             </header>
 			<p> 
 				Enter an address/ZIP code below to get<br/>
 				solar information and cost savings at the address below!
 			</p>
             <Form setInputText={setInputText} inputText={inputText} setQuery={setQuery} setAddress={setAddress} />
-            <h2> {query} </h2>
             <Info key={query} address={query} id="Info"/>
             <GoogleMap
                 address={address} 

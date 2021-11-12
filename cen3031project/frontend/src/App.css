@@ -5,24 +5,31 @@
   margin: 10px;
 }
 
-.App logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App h1{
   color: white;
   padding: 10px;
+  
 }
+
+.App h2, h3{
+	display: inline-block;
+	width:fit-content;
+	align-items:center;
+	background-color: #202025;
+	padding: 10px;
+	border: 5px outset #edc409;
+}
+
+.App img {
+	width: 200px;
+	height:200px;
+	padding: 10px;
+}
+
 .App p{
 	white-space: pre;
 }
+
 .App header {
 	-webkit-transform:scale(0.8);
 -moz-transform:scale(0.8);
@@ -31,7 +38,7 @@ transform:scale(0.8);
 	text-align: left;
   
   width: '60%';
-  background-color: black;
+  background-color: #202025;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -41,6 +48,8 @@ transform:scale(0.8);
   margin-left: auto;
   margin-right: auto;
   padding: 0px  10px 10px 10px;
+  
+	border: 10px groove #edc409;
 }
 
 .App link {
@@ -48,8 +57,23 @@ transform:scale(0.8);
 }
 
 .App Form{
-	
   padding: 20px;
+}
+
+.App Info{
+	background-color: #200000;
+    color: white;
+	padding: 10px;
+}
+
+.App GoogleMap{
+	align-items: center;
+}
+
+canvas {
+   background-color: #202025;
+   
+	border: 5px outset #edc409;
 }
 
 @keyframes App-logo-spin {
@@ -61,12 +85,13 @@ transform:scale(0.8);
   }
 }
 
-.App Info{
-	background-color: #200000;
-    color: white;
-	padding: 10px;
+.App logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-.App GoogleMap{
-	align-items: center;
+@media (prefers-reduced-motion: no-preference) {
+  .App logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
