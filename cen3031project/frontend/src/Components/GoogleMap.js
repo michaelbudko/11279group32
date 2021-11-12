@@ -15,8 +15,8 @@ export class MapContainer extends React.Component {
 						lat: this.props.address.latitude,
 						lng: this.props.address.longitude
 					}} center={{
-                    lat: this.props.address.latitude,
-                    lng: this.props.address.longitude
+                    				lat: this.props.address.latitude,
+                    				lng: this.props.address.longitude
 					}} zoom={14}>
 					<Marker onClick={this.onMarkerClick}
 						position={{ lat: this.props.address.latitude, lng: this.props.address.longitude }}
