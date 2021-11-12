@@ -98,7 +98,10 @@ export default class Info extends React.Component {
 		if(!this.state.isLoaded){
 			return <div> Input Address Above!<br/><br/></div>;
 		}else if(this.state.isError){
-			return <div> Error: Address not found.<br/><br/></div>
+			return <div> Error: Address not found.<br/>
+			Only addresses within the US are available.<br/>
+			Try a different address!<br/><br/>
+				</div>
 		}
 		else{
 			const dataChart = {
@@ -131,7 +134,7 @@ export default class Info extends React.Component {
 				Residential: {this.state.util_rate_res} $/kWh<br/><br/>
 
 				<h3>Average Utility Costs</h3><br/>
-				Residential figures based on 893 kWh/month average<br/><br/>
+				<u>Residential figures based on 893 kWh/month average</u><br/>
 				Average Monthly Cost (Residential): ${parseFloat((this.state.util_rate_res)*893).toFixed(2)} <br/>
 				Average Annual Cost (Residential): ${parseFloat((this.state.util_rate_res)*10715).toFixed(2)} <br/><br/>
 				<Line data={dataChart}></Line>
