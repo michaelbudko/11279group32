@@ -58,8 +58,8 @@ export default class Info extends React.Component {
 				
 				const output = data.outputs;
 				this.setState({
-					ac_annual: output.ac_annual,
-					ac_monthly: (output.ac_annual)/12,
+					ac_annual: output.ac_annual.toFixed(2),
+					ac_monthly: ((output.ac_annual)/12).toFixed(2),
 				});
 			});
 		
@@ -104,19 +104,19 @@ export default class Info extends React.Component {
 			return (
 				//Display info from APIs
 				<div key={this.props.address} >
-				
-				<h3>Solar Radiation Stats</h3>
+				<h2> {this.props.address} </h2><br/>
+				<h3>Solar Radiation Stats</h3><br/>
 				Average Daily Direct Normal Irradiance: {this.state.dni} kWh/m<sup>2</sup>/day <br/>
 				Average Daily Global Horizontal Irradiance: {this.state.ghi} kWh/m<sup>2</sup>/day<br/><br/>
 				
-				<h3>Solar Power Output</h3>
-				Average Output for 4 kW Capacity System<br/>
+				<h3>Solar Power Output</h3><br/>
+				<u>Average Output for 4 kW Capacity System</u><br/>
 				AC Monthly Output: {this.state.ac_monthly} kWh<br/>
 				AC Annual Output: {this.state.ac_annual} kWh<br/><br/>
 				
-				<h3>Utility Info</h3>
+				<h3>Utility Info</h3><br/>
 				Utility Company: {this.state.util_comp} <br/>
-				Utility Rates <br/>
+				<u>Utility Rates</u> <br/>
 				Commerical: {this.state.util_rate_com} $/kWh<br/>
 				Industrial: {this.state.util_rate_ind} $/kWh<br/>
 				Residential: {this.state.util_rate_res} $/kWh<br/><br/>

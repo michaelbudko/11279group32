@@ -8,7 +8,7 @@ export class MapContainer extends React.Component {
 			<div id = "Map">
 				<Map google={this.props.google}
 					style={{
-						width: '94%',
+						width: '97%',
 						height: '60%',
 					}}
 					initialCenter={{
