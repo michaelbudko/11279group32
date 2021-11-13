@@ -107,10 +107,18 @@ export default class Info extends React.Component {
 			const dataChart = {
 				labels: ['2021','2022','2023','2024','2025'],
 				datasets: [
-					{label: 'Cost',
-					borderColor: 'rgb(255, 255, 255)',
+					{label: 'Residential Savings',
+					borderColor: 'rgb(0, 255, 255)',
 					pointBackgroundColor: 'rgb(255, 0, 0)',
-					data: [this.state.util_rate_res*10909,this.state.util_rate_res*10909*2,this.state.util_rate_res*10909*3] }
+					data: [-2,this.state.util_rate_res*10715*2,this.state.util_rate_res*10715*3] },
+					{label: 'Commercial Savings',
+					borderColor: 'rgb(255, 0, 255)',
+					pointBackgroundColor: 'rgb(255, 0, 0)',
+					data: [-2,this.state.util_rate_res*90*2,this.state.util_rate_res*90*3] },
+					{label: 'Industrial Savings',
+					borderColor: 'rgb(255, 255, 0)',
+					pointBackgroundColor: 'rgb(255, 0, 0)',
+					data: [-2,this.state.util_rate_res*400*2,this.state.util_rate_res*400*3] }
 				]
 			}
 			return (
