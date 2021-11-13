@@ -92,6 +92,63 @@ export default class Info extends React.Component {
 	componentDidMount() {
 		this.getApiInfo(this.props.address);
 	}
+
+	//Figures based on 893 kWh/month with a 4kW solar system
+	getResCost(years, isSolar) {
+		let kWhs = 10715;
+		let costList = [];
+		if (isSolar) {
+			kWhs -= this.state.ac_annual;
+		}
+		let cost = kWhs*this.state.util_rate_res;
+		let tempCost = cost;
+		if (isSolar)
+			cost += 7184;
+		for (let i = 0; i <= years; i++) {
+			costList.push(cost)
+			tempCost *= 1.022;
+			cost += tempCost;
+		}
+		return costList;
+	}
+
+	//Figures based on 5692 kWh/month with a 25kW solar system
+	getComCost(years, isSolar) {
+		let kWhs = 68300;
+		let costList = [];
+		if (isSolar) {
+			kWhs -= this.state.ac_annual*6.25;
+		}
+		let cost = kWhs*this.state.util_rate_com;
+		let tempCost = cost;
+		if (isSolar)
+			cost += 44900;
+		for (let i = 0; i <= years; i++) {
+			costList.push(cost)
+			tempCost *= 1.022;
+			cost += tempCost;
+		}
+		return costList;
+	}
+
+	//Figures based on 68300 kWh/month with a 200kW solar system
+	getIndCost(years, isSolar) {
+		let kWhs = 966500;
+		let costList = [];
+		if (isSolar) {
+			kWhs -= this.state.ac_annual*50;
+		}
+		let cost = kWhs*this.state.util_rate_ind;
+		let tempCost = cost;
+		if (isSolar)
+			cost += 359200;
+		for (let i = 0; i <= years; i++) {
+			costList.push(cost)
+			tempCost *= 1.022;
+			cost += tempCost;
+		}
+		return costList;
+	}
 	
 	render() {
 		//Display message at start before query
@@ -104,13 +161,43 @@ export default class Info extends React.Component {
 				</div>
 		}
 		else{
-			const dataChart = {
-				labels: ['2021','2022','2023','2024','2025'],
+			const dataChartRes = {
+				labels: ['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030', '2031', '2032', '2033', '2034', '2035'],
 				datasets: [
-					{label: 'Cost',
+					{label: 'Cumulative Residential Utility Cost',
 					borderColor: 'rgb(255, 255, 255)',
 					pointBackgroundColor: 'rgb(255, 0, 0)',
-					data: [this.state.util_rate_res*10909,this.state.util_rate_res*10909*2,this.state.util_rate_res*10909*3] }
+					data: this.getResCost(15, false) },
+					{label: 'Cumulative Residential Solar Cost',
+						borderColor: 'rgb(255, 255, 0)',
+						pointBackgroundColor: 'rgb(255, 0, 0)',
+						data: this.getResCost(15, true) }
+				]
+			}
+			const dataChartCom = {
+				labels: ['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030', '2031', '2032', '2033', '2034', '2035'],
+				datasets: [
+					{label: 'Cumulative Commercial Utility Cost',
+						borderColor: 'rgb(0, 255, 255)',
+						pointBackgroundColor: 'rgb(255, 0, 0)',
+						data: this.getComCost(15, false) },
+					{label: 'Cumulative Commercial Solar Cost',
+						borderColor: 'rgb(0, 100, 255)',
+						pointBackgroundColor: 'rgb(255, 0, 0)',
+						data: this.getComCost(15, true) }
+				]
+			}
+			const dataChartInd = {
+				labels: ['2021','2022','2023','2024','2025','2026','2027','2028','2029','2030', '2031', '2032', '2033', '2034', '2035'],
+				datasets: [
+					{label: 'Cumulative Industrial Utility Cost',
+						borderColor: 'rgb(255, 0, 255)',
+						pointBackgroundColor: 'rgb(255, 0, 0)',
+						data: this.getIndCost(15, false)},
+					{label: 'Cumulative Industrial Solar Cost',
+						borderColor: 'rgb(0, 255, 0)',
+						pointBackgroundColor: 'rgb(255, 0, 0)',
+						data: this.getIndCost(15, true) }
 				]
 			}
 			return (
@@ -137,7 +224,9 @@ export default class Info extends React.Component {
 				<u>Residential figures based on 893 kWh/month average</u><br/>
 				Average Monthly Cost (Residential): ${parseFloat((this.state.util_rate_res)*893).toFixed(2)} <br/>
 				Average Annual Cost (Residential): ${parseFloat((this.state.util_rate_res)*10715).toFixed(2)} <br/><br/>
-				<Line data={dataChart}></Line>
+				<Line data={dataChartRes}></Line>
+				<Line data={dataChartCom}></Line>
+				<Line data={dataChartInd}></Line>
 				</div>
 				
 			);
