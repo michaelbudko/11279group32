@@ -149,6 +149,17 @@ export default class Info extends React.Component {
 		}
 		return costList;
 	}
+
+	getSavings(solar, util) {
+		let savingsList = [];
+		for (let i = 0; i < solar.length; i++) {
+			if (util[i] - solar[i] < 0)
+				savingsList.push(0)
+			else
+				savingsList.push(util[i] - solar[i])
+		}
+		return savingsList
+	}
 	
 	render() {
 		//Display message at start before query
@@ -171,7 +182,11 @@ export default class Info extends React.Component {
 					{label: 'Cumulative Residential Solar Cost',
 						borderColor: 'rgb(255, 255, 0)',
 						pointBackgroundColor: 'rgb(255, 0, 0)',
-						data: this.getResCost(15, true) }
+						data: this.getResCost(15, true) },
+					{label: 'Residential Savings',
+						borderColor: 'rgb(255, 0, 0)',
+						pointBackgroundColor: 'rgb(0, 0, 0)',
+						data: this.getSavings(this.getResCost(15, true), this.getResCost(15, false)) }
 				]
 			}
 			const dataChartCom = {
@@ -184,7 +199,11 @@ export default class Info extends React.Component {
 					{label: 'Cumulative Commercial Solar Cost',
 						borderColor: 'rgb(0, 100, 255)',
 						pointBackgroundColor: 'rgb(255, 0, 0)',
-						data: this.getComCost(15, true) }
+						data: this.getComCost(15, true) },
+					{label: 'Commercial Savings',
+						borderColor: 'rgb(255, 0, 0)',
+						pointBackgroundColor: 'rgb(0, 0, 0)',
+						data: this.getSavings(this.getComCost(15, true), this.getComCost(15, false)) }
 				]
 			}
 			const dataChartInd = {
@@ -197,14 +216,18 @@ export default class Info extends React.Component {
 					{label: 'Cumulative Industrial Solar Cost',
 						borderColor: 'rgb(0, 255, 0)',
 						pointBackgroundColor: 'rgb(255, 0, 0)',
-						data: this.getIndCost(15, true) }
+						data: this.getIndCost(15, true) },
+					{label: 'Industrial Savings',
+						borderColor: 'rgb(255, 0, 0)',
+						pointBackgroundColor: 'rgb(0, 0, 0)',
+						data: this.getSavings(this.getIndCost(15, true), this.getIndCost(15, false)) }
 				]
 			}
 			return (
 				//Display info from APIs
 				<div key={this.props.address} >
 				<h2> {this.props.address} </h2><br/>
-				<h3>Solar Radiation Stats</h3><br/>
+{/*				<h3>Solar Radiation Stats</h3><br/>
 				Average Daily Direct Normal Irradiance: {this.state.dni} kWh/m<sup>2</sup>/day <br/>
 				Average Daily Global Horizontal Irradiance: {this.state.ghi} kWh/m<sup>2</sup>/day<br/><br/>
 				
@@ -223,7 +246,8 @@ export default class Info extends React.Component {
 				<h3>Average Utility Costs</h3><br/>
 				<u>Residential figures based on 893 kWh/month average</u><br/>
 				Average Monthly Cost (Residential): ${parseFloat((this.state.util_rate_res)*893).toFixed(2)} <br/>
-				Average Annual Cost (Residential): ${parseFloat((this.state.util_rate_res)*10715).toFixed(2)} <br/><br/>
+				Average Annual Cost (Residential): ${parseFloat((this.state.util_rate_res)*10715).toFixed(2)} <br/><br/>*/}
+
 				<Line data={dataChartRes}></Line>
 				<Line data={dataChartCom}></Line>
 				<Line data={dataChartInd}></Line>
